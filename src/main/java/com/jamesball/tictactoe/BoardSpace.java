@@ -1,6 +1,6 @@
 package com.jamesball.tictactoe;
 
-public class BoardSpace {
+public final class BoardSpace {
 
     private PlayerMark playerMark = null;
 
@@ -11,10 +11,14 @@ public class BoardSpace {
         return this.playerMark;
     }
 
+    public void setPlayerMark(PlayerMark playerMark) {
+        this.playerMark = playerMark;
+    }
+
     @Override
     public String toString() {
         return "BoardSpace{" +
-                "playerMark=" + playerMark +
+                "playerMark=" + this.playerMark +
                 "}";
     }
 }

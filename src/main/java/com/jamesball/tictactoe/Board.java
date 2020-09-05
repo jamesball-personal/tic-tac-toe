@@ -2,14 +2,14 @@ package com.jamesball.tictactoe;
 
 import java.util.Arrays;
 
-public class Board {
+public final class Board {
 
-    private static final short BOARD_SIZE = 3;
+    private static final int BOARD_SIZE = 3;
     private final BoardSpace[][] boardSpaces = new BoardSpace[BOARD_SIZE][BOARD_SIZE];
 
     {
-        for (short i = 0; i < BOARD_SIZE; i++) {
-            for (short j = 0; j < BOARD_SIZE; j++) {
+        for (int i = 0; i < BOARD_SIZE; i++) {
+            for (int j = 0; j < BOARD_SIZE; j++) {
                 boardSpaces[i][j] = new BoardSpace();
             }
         }
@@ -18,11 +18,11 @@ public class Board {
     public Board() {
     }
 
-    public short getBoardSize() {
+    public int getBoardSize() {
         return BOARD_SIZE;
     }
 
-    public BoardSpace getBoardSpace(short rowNumber, short columnNumber) {
+    public BoardSpace getBoardSpace(int rowNumber, int columnNumber) {
         return this.boardSpaces[rowNumber][columnNumber];
     }
 

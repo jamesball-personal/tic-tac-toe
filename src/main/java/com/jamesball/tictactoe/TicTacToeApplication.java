@@ -6,20 +6,37 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class TicTacToeApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(TicTacToeApplication.class, args);
-		final Board board = new Board();
-		printBoard(board);
+	private static final Board board = new Board();
+	private static final Player[] players = new Player[PlayerMark.values().length];
+	private static final Turn TURN = new Turn();
+
+	private static Player currentPlayer;
+
+	static {
+		for (PlayerMark playerMark : PlayerMark.values()) {
+			players[playerMark.getPlayerNumber() - 1] = new Player(playerMark);
+		}
 	}
 
-	private static void printBoard(Board board) {
-		short boardSize = board.getBoardSize();
+	static {
+		currentPlayer = players[0];
+	}
+
+	public static void main(String[] args) {
+		SpringApplication.run(TicTacToeApplication.class, args);
+		printBoard();
+		TURN.takeTurn(currentPlayer, board);
+		printBoard();
+	}
+
+	private static void printBoard() {
+		int boardSize = board.getBoardSize();
 		System.out.print("   ");
-		for (short i = 0; i < boardSize; i++) {
+		for (int i = 0; i < boardSize; i++) {
 			System.out.print(" " + i + "  ");
 		}
 		System.out.print("\n");
-		for (short i = 0; i < boardSize; i++) {
+		for (int i = 0; i < boardSize; i++) {
 			System.out.println("  +" + "---+".repeat(boardSize));
 			System.out.print(i + " |");
 			for (short j = 0; j < boardSize; j++) {
