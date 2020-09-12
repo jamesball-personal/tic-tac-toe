@@ -18,7 +18,7 @@ public final class BoardSpace {
     @Override
     public String toString() {
         return "BoardSpace{" +
-                "playerMark=" + this.playerMark +
+                "playerMark=" + playerMark +
                 "}";
     }
 }
