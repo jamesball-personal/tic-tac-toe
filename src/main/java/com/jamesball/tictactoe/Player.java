@@ -2,7 +2,7 @@ package com.jamesball.tictactoe;
 
 public final class Player {
 
-    private PlayerMark playerMark;
+    private final PlayerMark playerMark;
 
     public Player(PlayerMark playerMark) {
         this.playerMark = playerMark;
