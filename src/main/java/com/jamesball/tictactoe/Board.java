@@ -4,12 +4,15 @@ import java.util.Arrays;
 
 public final class Board {
 
-    private final int BOARD_SIZE = 3;
-    private final BoardSpace[][] boardSpaces = new BoardSpace[BOARD_SIZE][BOARD_SIZE];
+    // TODO Change to be a configurable parameter
+    private final int SIZE = 3;
+    private final BoardSpace[][] boardSpaces = new BoardSpace[SIZE][SIZE];
 
+
+    // Initialise boardSpaces
     {
-        for (int i = 0; i < BOARD_SIZE; i++) {
-            for (int j = 0; j < BOARD_SIZE; j++) {
+        for (int i = 0; i < SIZE; i++) {
+            for (int j = 0; j < SIZE; j++) {
                 boardSpaces[i][j] = new BoardSpace();
             }
         }
@@ -18,31 +21,46 @@ public final class Board {
     public Board() {
     }
 
-    public int getBoardSize() {
-        return BOARD_SIZE;
+    public int getSize() {
+        return SIZE;
+    }
+
+    public BoardSpace[][] getBoardSpaces() {
+        return boardSpaces;
     }
 
     public BoardSpace getBoardSpace(int rowNumber, int columnNumber) {
         return boardSpaces[rowNumber][columnNumber];
     }
 
-    public void printBoard() {
+    public void print() {
+        // Print the number of each column above the board
 		System.out.print("   ");
-		for (int i = 0; i < BOARD_SIZE; i++) {
+		for (int i = 0; i < SIZE; i++) {
 			System.out.print(" " + i + "  ");
 		}
 		System.out.print("\n");
-		for (int i = 0; i < BOARD_SIZE; i++) {
-			System.out.println("  +" + "---+".repeat(BOARD_SIZE));
+
+		// Print the each row
+		for (int i = 0; i < SIZE; i++) {
+
+		    // Print the upper row divider
+			System.out.println("  +" + "---+".repeat(SIZE));
+
+			// Print the row number
 			System.out.print(i + " |");
-			for (short j = 0; j < BOARD_SIZE; j++) {
+
+			// Print the mark of each board space in the row
+			for (short j = 0; j < SIZE; j++) {
 				BoardSpace boardSpace = boardSpaces[i][j];
 				String playerMark = (boardSpace.getPlayerMark() == null) ? " " : boardSpace.getPlayerMark().name();
 				System.out.print(" " + playerMark + " |");
 			}
 			System.out.print("\n");
 		}
-		System.out.println("  +" + "---+".repeat(BOARD_SIZE));
+
+		// Print the lower row divider of the last row
+		System.out.println("  +" + "---+".repeat(SIZE));
 	}
 
     @Override

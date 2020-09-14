@@ -4,6 +4,7 @@ public enum GameStatus {
 
     NOT_STARTED,
     STARTED,
-    ENDED
+    WON,
+    DRAWN
 
 }

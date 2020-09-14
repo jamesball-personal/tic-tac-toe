@@ -2,20 +2,20 @@ package com.jamesball.tictactoe;
 
 public final class Player {
 
-    private final PlayerMark playerMark;
+    private final PlayerMark mark;
 
-    public Player(PlayerMark playerMark) {
-        this.playerMark = playerMark;
+    public Player(PlayerMark mark) {
+        this.mark = mark;
     }
 
-    public PlayerMark getPlayerMark() {
-        return playerMark;
+    public PlayerMark getMark() {
+        return mark;
     }
 
     @Override
     public String toString() {
         return "Player{" +
-                "playerMark=" + this.playerMark +
+                "mark=" + mark +
                 "}";
     }
 
