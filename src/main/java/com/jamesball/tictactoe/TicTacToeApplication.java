@@ -10,8 +10,7 @@ public class TicTacToeApplication {
 
 	static {
 		for (PlayerMark playerMark : PlayerMark.values()) {
-			Player newPlayer = new Player(playerMark);
-			players[playerMark.getPlayerNumber() - 1] = newPlayer;
+			players[playerMark.getPlayerNumber() - 1] = new Player(playerMark);
 		}
 	}
 

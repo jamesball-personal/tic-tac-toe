@@ -5,40 +5,52 @@ import java.util.regex.Pattern;
 
 public final class PlayerTurn {
 
-    public PlayerTurn() {
+    private final Scanner scanner = new Scanner(System.in);
+
+    private final Board board;
+    private final Player player;
+    private PlayerMove move;
+
+    public PlayerTurn(Board board, Player player) {
+        this.board = board;
+        this.player = player;
     }
 
-    public void move(Board board, Player player) {
-        PlayerMove move = chooseMove(board);
-        addMoveToBoard(board, player, move);
+    public void move() {
+        chooseMove();
+        addMoveToBoard();
     }
 
-    private void addMoveToBoard(Board board, Player player, PlayerMove move) {
-        board.getBoardSpace(move.getRowNumber(), move.getColumnNumber()).setPlayerMark(player.getPlayerMark());
+    public PlayerMove getMove() {
+        return move;
     }
 
-    private PlayerMove chooseMove(Board board) throws InvalidPlayerMoveException {
+    private void addMoveToBoard() {
+        board.getBoardSpace(move.getRowNumber(), move.getColumnNumber()).setPlayerMark(player.getMark());
+    }
+
+    private void chooseMove() throws InvalidPlayerMoveException {
         while (true) {
             try {
                 String playerInput = inputMove();
-                PlayerMove move = parseMove(playerInput);
+                move = parseMove(playerInput);
                 validateMove(board, move);
-                return move;
+                break;
             }
             catch (InvalidPlayerMoveException exception) {
-                System.out.println("Invalid move.");
+                System.out.println("Invalid Move");
             }
         }
-
     }
 
     private String inputMove() {
-        final Scanner scanner = new Scanner(System.in);
-        System.out.print("Enter move: ");
+        System.out.print("Enter Move: ");
         return scanner.next();
     }
 
     private PlayerMove parseMove(String playerInput) {
+        // The player input must be two undelimited numbers
+        // The first number is the row number, the second number is the column number
         final Pattern inputPattern = Pattern.compile("[0-9]{2}");
         if (inputPattern.matcher(playerInput).matches()) {
             String[] coordinates = playerInput.split("");
@@ -50,9 +62,9 @@ public final class PlayerTurn {
     }
 
     private void validateMove(Board board, PlayerMove move) throws InvalidPlayerMoveException {
-        if (
-                !(move.getRowNumber() < board.getBoardSize())
-                || !(move.getColumnNumber() < board.getBoardSize())
+        // The move must reference a valid board space that has not been marked
+        if (!(move.getRowNumber() < board.getSize())
+                || !(move.getColumnNumber() < board.getSize())
                 || !(board.getBoardSpace(move.getRowNumber(), move.getColumnNumber()).getPlayerMark() == null)
         ) {
             throw new InvalidPlayerMoveException();
