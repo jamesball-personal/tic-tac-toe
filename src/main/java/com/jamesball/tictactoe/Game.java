@@ -20,7 +20,6 @@ public final class Game {
         startGame();
         while (!isGameOver()) {
             takeTurn();
-            board.print();
         }
         endGame();
     }
@@ -34,6 +33,7 @@ public final class Game {
         setCurrentPlayer();
         PlayerTurn turn = new PlayerTurn(board, currentPlayer);
         turn.move();
+        board.print();
         checkWin(turn.getMove());
     }
 
