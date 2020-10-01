@@ -1,23 +1,29 @@
 package com.jamesball.tictactoe;
 
+import com.jamesball.tictactoe.controller.BoardController;
+import com.jamesball.tictactoe.controller.PlayerController;
+import com.jamesball.tictactoe.view.BoardView;
+import com.jamesball.tictactoe.view.SelectMoveView;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
 public class TicTacToeApplication {
 
-	private static final Player[] players = new Player[PlayerMark.values().length];
-
-	static {
-		for (PlayerMark playerMark : PlayerMark.values()) {
-			players[playerMark.getPlayerNumber() - 1] = new Player(playerMark);
-		}
-	}
-
 	public static void main(String[] args) {
 		SpringApplication.run(TicTacToeApplication.class, args);
-		Game game = new Game(players);
-		game.play();
+
+		PlayerController playerController = new PlayerController();
+		playerController.selectPlayer();
+
+		SelectMoveView selectMoveView = new SelectMoveView();
+		BoardView boardView = new BoardView();
+
+		BoardController boardController = new BoardController();
+
+		boardController.printBoard();
+		boardController.addMoveToBoard(playerController.getPlayerMark());
+		boardController.printBoard();
 	}
 
 }

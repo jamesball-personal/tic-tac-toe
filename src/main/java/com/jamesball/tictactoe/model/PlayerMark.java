@@ -1,4 +1,4 @@
-package com.jamesball.tictactoe;
+package com.jamesball.tictactoe.model;
 
 public enum PlayerMark {
 
